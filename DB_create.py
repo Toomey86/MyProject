@@ -9,7 +9,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:password@localhos
 db.init_app(app)
 app.secret_key = "development-key"
 db = SQLAlchemy(app)
-Migrate(app,db)
+# Migrate(app,db)
 
 
 db.create_all()
