@@ -8,9 +8,10 @@ Github account
 
 <!--- Python Libraries used -->
 
-vitual env
-pip install Flask SQL Alchemy (For DB models)
-pip install Forms WTF (for forms)
+pip install vitual env
+pip install Flask SQL Alchemy # For DB models
+pip install Forms WTF # for forms
+pip install psycopg2  # for python/postgre
 pip install FLask-Mail (email)
 pip install gunicorn
 
@@ -20,13 +21,20 @@ pip install gunicorn
 Flask
 Postgres DB
 Bootstrap for font end
-Vanilla JS ans css
+JS and css
 
 
 <!--- VIRTUAL ENVIROMENT SETUP -->
-<!-- ON MAC/Linux -->
+<!-- MAC/Linux -->
 To create a virtual env: "virtualenv venv"
 To activte virtual env: "source venv/bin/activate"
+<!-- Windows need conda installed -->
+conda create -n MyTestEnv
+conda env list # list of Enviroments
+activate MyTestEnv
+deactivate #mac source deactivate
+
+
 
 <!-- DATABASE INFO -->
 
@@ -58,6 +66,12 @@ heroku git:remote -a business-expense-tracker
 git add .
 git commit -am "Some message about changes"
 git push heroku master
+<!--Other Heroku useful commands  -->
+heroku addons
+heroku addons:create heroku-postgresql:hobby-dev
+heroku plugins:install heroku-pg-extras
+heroku open //
+heroku run python
 
 
 <!-- Shell -->
