@@ -12,6 +12,8 @@ vitual env
 pip install Flask SQL Alchemy (For DB models)
 pip install Forms WTF (for forms)
 pip install FLask-Mail (email)
+pip install gunicorn
+
 
 <!-- TECHNOLOGY USED -->
 
@@ -22,6 +24,7 @@ Vanilla JS ans css
 
 
 <!--- VIRTUAL ENVIROMENT SETUP -->
+<!-- ON MAC/Linux -->
 To create a virtual env: "virtualenv venv"
 To activte virtual env: "source venv/bin/activate"
 
@@ -45,7 +48,16 @@ or simply use:
 
 $ python app.py
 
+<!--Create a requirment.txt file  -->
+pip freeze > requirements.txt
+
 <!--Heroku set up  -->
+heroku login
+git init
+heroku git:remote -a business-expense-tracker
+git add .
+git commit -am "Some message about changes"
+git push heroku master
 
 
 <!-- Shell -->

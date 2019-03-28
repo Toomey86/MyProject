@@ -38,6 +38,7 @@ def logout():
 
 
 @app.route("/", methods=['GET', 'POST'])
+@app.route('/index', methods=['GET', 'POST'])
 def login():
     if 'uid' in session:
         return redirect(url_for('dashboard'))
