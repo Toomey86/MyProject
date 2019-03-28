@@ -45,6 +45,9 @@ or simply use:
 
 $ python app.py
 
+<!--Heroku set up  -->
+
+
 <!-- Shell -->
 $ flask shell
 from models import db
