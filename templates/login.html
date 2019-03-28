@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+
+
+{% block additional_styles %}
+
+
+<link href="{{ url_for('static', filename='css/login.css') }}" rel="stylesheet">
+
+{% endblock additional_styles %}
+
+{% block content %}
+
+
+
+
+			<form method="POST" action="/" class="form-signin">
+				{{ form.hidden_tag() }}
+
+				<img class="mb-4" src="#" alt="" width="72" height="72">
+      			<h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+
+
+
+					<!-- Error -->
+					{% if form.email.errors %}
+						{% for error in form.email.errors %}
+							<p class="error-message">{{error}}</p>
+						{% endfor %}
+					{% endif %}
+					<!-- end error -->
+
+					{{ form.email }}
+
+
+
+					<!-- Error -->
+					{% if form.password.errors %}
+						{% for error in form.password.errors %}
+							<p class="error-message">{{error}}</p>
+						{% endfor %}
+					{% endif %}
+					<!-- end error -->
+
+
+					{{ form.password }}
+
+
+				{{ form.submit(class="btn btn-lg btn-primary btn-block") }}
+				<p class="mt-5 mb-3 text-muted">© 2017-2018</p>
+			</form>
+
+
+
+
+{% endblock content %}

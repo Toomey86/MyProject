@@ -1,0 +1,45 @@
+{% extends "dashboard_layout.html" %}
+
+{% block main %}
+<br>
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+  <h1 class="">My Expenses</h1>
+  <div class="btn-toolbar mb-2 mb-md-0">
+    <!-- <div class="btn-group"> -->
+      <a class="btn btn-success btn-block" href="{{ url_for('newrequest') }}">New</a>
+      <a class="btn btn-danger btn-block" href="/">Export</a>
+    <!-- </div> -->
+
+  </div>
+</div>
+
+
+<p class="align-items-left">below are a list of all your expenses</p>
+
+<div class="table-responsive">
+  <table class="table table-striped table-sm">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Description</th>
+        <th>Type</th>
+        <th>Amount</th>
+        <th>status</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for req in user.requests %}
+        <tr onclick="window.location.href='view/{{req.id}}'">
+          <td>{{ req.id }}</td>
+          <td>{{ req.description }}</td>
+          <td>{{ req.type }}</td>
+          <td>€{{ req.amount }}</td>
+          <td class="{{req.status|slugify}}">{{ req.status }}</td>
+        </tr>
+      {% endfor %}
+
+    </tbody>
+  </table>
+</div>
+
+{% endblock main %}

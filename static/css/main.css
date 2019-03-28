@@ -1,0 +1,62 @@
+body{
+
+}
+
+.uploaded-image{
+	max-width: 300px;
+}
+
+table tr:hover {
+  background-color:#007bffa8!important;
+}
+.awaiting{
+  color:orange;
+}
+.declined, .rejected, .canceled{
+  color:red;
+}
+.awaiting-finance{
+  color:yellow;
+}
+.approved{
+  color:green;
+}
+
+#register-section{
+  background: url(register_bg.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  min-height: 700px;
+}
+#register-section .dar-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 700px;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+:root {
+--funyellow: #feda6a;
+--SilverFox: #d4d4dc;
+--DeepMatteGrey: #393f4d;
+--DarkSlate: #1d1e22;
+}
+body{
+/* background-color: #bcd5d1; */
+}
+.navbar{
+  border-bottom: #008ed6 3px solid;
+  opacity: 0.8;
+  }
+.navbar-brand {
+  float: left;
+  min-height: 55px;
+  padding: 0 5px 5px;
+}
+ .navbar-inverse .navbar-nav .active a, .navbar-inverse .navbar-nav .active a:focus, .navbar-inverse .navbar-nav .active a:hover{
+  color: #d4d4dc;
+  background-color: #393f4d
+}

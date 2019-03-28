@@ -1,0 +1,116 @@
+{% extends "dashboard_layout.html" %}
+
+
+{% block main %}
+
+
+
+	<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+  		<h1 class="">Create new user</h1>
+	</div>
+
+
+<p class="align-items-left">Please fill in all user details below</p>
+
+
+
+	<main class="signup-section">
+		<div class="section-content">
+			
+
+			<form method="POST" action="/signup" autocomplete="off">
+				{{ form.hidden_tag() }}
+
+				<div class="form-group mb3">
+					{{ form.first_name.label }}
+
+					<!-- Error -->
+					{% if form.first_name.errors %}
+						{% for error in form.first_name.errors %}
+							<p class="error-message text-danger">{{error}}</p>
+						{% endfor %}
+					{% endif %}
+					<!-- end error -->
+
+					{{ form.first_name }}
+				</div>
+
+				<div class="form-group">
+					{{ form.last_name.label }}
+
+					<!-- Error -->
+					{% if form.last_name.errors %}
+						{% for error in form.last_name.errors %}
+							<p class="error-message text-danger">{{error}}</p>
+						{% endfor %}
+					{% endif %}
+					<!-- end error -->
+
+					{{ form.last_name }}
+				</div>
+
+				<div class="form-group">
+					{{ form.email.label }}
+
+						<!-- Error -->
+					{% if form.email.errors %}
+						{% for error in form.email.errors %}
+							<p class="error-message text-danger">{{error}}</p>
+						{% endfor %}
+					{% endif %}
+					<!-- end error -->
+
+					{{ form.email }}
+				</div>
+
+				<div class="form-group">
+					{{ form.phone.label }}
+
+						<!-- Error -->
+					{% if form.phone.errors %}
+						{% for error in form.phone.errors %}
+							<p class="error-message text-danger">{{error}}</p>
+						{% endfor %}
+					{% endif %}
+					<!-- end error -->
+
+					{{ form.phone }}
+				</div>
+
+				<div class="form-group">
+					{{ form.password.label }}
+
+					<!-- Error -->
+					{% if form.password.errors %}
+						{% for error in form.password.errors %}
+							<p class="error-message text-danger">{{error}}</p>
+						{% endfor %}
+					{% endif %}
+					<!-- end error -->
+
+
+					{{ form.password }}
+				</div>
+
+
+				<div class="form-group mb-3">
+					{{ form.role.label }}
+					{{ form.role }}
+					<!-- Error -->
+					{% if form.role.errors %}
+						{% for error in form.role.errors %}
+							<p class="error-message text-danger">{{error}}</p>
+						{% endfor %}
+					{% endif %}
+					<!-- end error -->
+				</div>
+
+
+				{{ form.submit(class="btn btn-primary btn-lg btn-block") }}
+			</form>
+
+
+		</div>
+	</main>
+
+{% endblock main %}

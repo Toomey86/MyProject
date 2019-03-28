@@ -1,0 +1,81 @@
+{% extends "dashboard_layout.html" %}
+
+
+{% block main %}
+
+	<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+  		<h1 class="">New Request</h1>
+	</div>
+
+
+<p class="align-items-left">Please fill in all request details below</p>
+
+
+	<main class="signup-section">
+		<div class="section-content">
+			
+			<form method="POST" action="/new" enctype="multipart/form-data">
+				{{ form.hidden_tag() }}
+
+				<div class="form-group mb-3">
+					{{ form.type.label }}
+					{{ form.type }}
+					<!-- Error -->
+					{% if form.type.errors %}
+						{% for error in form.type.errors %}
+							<p class="error-message">{{error}}</p>
+						{% endfor %}
+					{% endif %}
+					<!-- end error -->
+				</div>
+
+				<div class="form-group mb-3">
+					{{ form.description.label }}
+					{{ form.description }}
+					<!-- Error -->
+					{% if form.description.errors %}
+						{% for error in form.description.errors %}
+							<p class="error-message">{{error}}</p>
+						{% endfor %}
+					{% endif %}
+					<!-- end error -->
+				</div>
+
+				
+				<div class="form-group mb-3">
+					{{ form.image.label }}
+					{{ form.image }}
+					<!-- Error -->
+					{% if form.image.errors %}
+						{% for error in form.image.errors %}
+							<p class="error-message">{{error}}</p>
+						{% endfor %}
+					{% endif %}
+					<!-- end error -->
+				</div>
+
+
+				<div class="form-group mb-3">
+					
+					{{ form.amount.label }}
+					{{ form.amount }}
+					<!-- Error -->
+					{% if form.amount.errors %}
+						{% for error in form.amount.errors %}
+							<p class="error-message">{{error}}</p>
+						{% endfor %}
+					{% endif %}
+					<!-- end error -->
+
+
+					
+				</div>
+
+				{{ form.submit(class="btn btn-primary btn-lg btn-block") }}
+			</form>
+
+
+		</div>
+	</main>
+
+{% endblock main %}

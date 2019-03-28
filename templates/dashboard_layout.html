@@ -1,0 +1,65 @@
+<head>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+</head>
+{% extends "layout.html" %}
+
+{% block additional_styles %}
+<link href="{{ url_for('static', filename='css/dashboard.css') }}" rel="stylesheet">
+{% endblock additional_styles %}
+
+{% block content %}
+
+<nav class=" navbar navbar-expand-sm navbar-dark bg-dark fixed-top p-0">
+<!-- <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0"> -->
+      <!-- <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Company name</a> -->
+      <div class="container">
+      <a class="navbar-brand mx-auto" href="{{ url_for('dashboard') }}"><h4>Business Expense Tracker</h4> </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#myNavbar">
+      <span class="navbar-toggle-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse">
+      <!-- <ul class="navbar-nav px-3"> -->
+      <ul class="navbar-nav ml-auto">
+        <!-- <li class="nav-item text-nowrap"> -->
+          <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('logout') }}">
+          <i class="fas fa-user-times"></i> {{user.firstname}}, Logot
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <br><br><br>
+
+      	{% include 'snippets/leftnav.html' %}
+
+        <!-- END NAV -->
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+
+          {% block main %}
+
+          {% endblock main %}
+          <!-- <div class="col-md-10"> -->
+            <!-- <nav class="navbar fixed-bottom navbar-dark sm-dark"> -->
+            <div class="fixed-bottom">
+              <div class="d-flex justify-content">
+                <div class="col">
+                </div>
+              <div class="col">
+                <a href="{{ url_for('tcs') }}"><h6>Term & Conditions</a></h6>
+              </div>
+              <div class="col">
+                <a  href="{{ url_for('privacy_policy') }}"><h6>Privacy Policy</a></h6>
+              </div>
+                <div class="col">
+                <a  href="{{ url_for('faq') }}"><h6>Frequently Asked Questions</a></h6>
+              </div>
+              <div class="col">
+                <a  href="{{ url_for('license') }}"><h6>License</a></h6>
+              </div>
+              </div>
+            </div>
+        </main>
+
+
+{% endblock content %}

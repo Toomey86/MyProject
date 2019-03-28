@@ -1,0 +1,64 @@
+{% extends "dashboard_layout.html" %}
+
+{% block main %}
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+  <h1 class="">Request #{{ req.id }} - <span class="{{req.status|slugify}}">{{req.status}}</span></h1>
+  <a class="back" href="{{ url_for('dashboard') }}">Back</a>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<p><span class="font-weight-bold">Type:</span> {{ req.type }}</p>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<span class="font-weight-bold">Descripton:</span>
+	</div>
+	<div class="col-md-12 description">
+		<p>{{ req.description }}</p>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<a href="/uploads/{{req.id}}.{{req.image}}" target="_blank">
+			<img class="uploaded-image" src="/uploads/{{req.id}}.{{req.image}}">
+		</a>
+	</div>
+</div>
+
+<div class="row">
+
+	<div class="col-md-12">
+		<h2>Total: €{{ req.amount }}</h2>
+	</div>
+
+</div>
+
+
+<!-- You can approve your own requests -->
+{% if user.uid != req.uid %}
+<div class="row options">
+	<div class="col-md-4">
+		<form method="POST" action="/approve">
+			<input type="hidden" name="id" value="{{req.id}}"/>
+			<button class="btn btn-primary btn-lg btn-block">Approve</button>
+		</form>
+	</div>
+	<div class="col-md-4">
+		<form method="POST" action="/reject">
+			<input type="hidden" name="id" value="{{req.id}}"/>
+			<button class="btn btn-danger btn-lg btn-block">Reject</button>
+		</form>
+	</div>
+</div>
+{% else %}
+<div class="alert alert-warning" role="alert">
+  You cannot approve/reject our own claim
+</div>
+{% endif %}
+
+{% endblock main %}
