@@ -150,16 +150,15 @@ The Request Response loop
 // sample users
 
 Financial Admin
-sdarcy@cartrawler.com
-NokaiN900
+
 
 Manager
 john@himself.com
 NokiaN900
 
 Employee
-ally@expenses.com
-Martin
+allymkm@gmail.com
+Martin.toomey86@gmail.com
 
 
 Todo
@@ -205,3 +204,4 @@ Is the line manager / finance admin not the approver?
 Cost center appears in the Entity but no where else?
 
 Is there a need to a notification DB table?
+"# MyProject" 
