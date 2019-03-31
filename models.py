@@ -4,9 +4,6 @@ from werkzeug import generate_password_hash, check_password_hash
 
 db = SQLAlchemy()
 
-# db.create_all()
-
-
 # Role
 # 0 is admin, 1 is manager, 2 is employee
 
@@ -51,6 +48,10 @@ class User(db.Model):
 	def __repr__(self):
 		return '<User %r>' % self.firstname
 
+	def json(self):
+		return {column: value if not isinstance(value, datetime.date) else value.strftime('%Y-%m-%d')
+		for column, value in self._to_dict().items()}
+
 
 class Requests(db.Model):
 	__tablename__ = 'requests'
@@ -73,5 +74,8 @@ class Requests(db.Model):
 		self.user =  user
 
 	def __repr__(self):
-		return '<Requests %r>' % self.type
-		
+		#return '<Requests %r>' % self.type
+		return '%s(%s)' % (self.__class__.__name__, {
+            column: value
+            for column, value in self._to_dict().items()
+        })

@@ -1,23 +1,43 @@
-from flask import Flask, render_template, request, session, redirect, url_for, send_from_directory
+from flask import Flask,  render_template, request, session, redirect, url_for, send_from_directory
+from flask_migrate import MigrateCommand, Migrate
 from models import db, User, Requests
 from forms import SignupForm, LoginForm, RequestForm
 from helpers.slugify import slugify
 from werkzeug import secure_filename
 from flask_mail import Mail, Message
+import pygal
 
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:password@localhost/blah'
+POSTGRES = {
+    'user': 'postgres',
+    'pw': 'password',
+    'db': 'blah',
+    'host': 'localhost',
+    'port': '5432',}
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:password@localhost/blah'
+app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://%(user)s:%(pw)s@%(host)s:%(port)s/%(db)s" % POSTGRES
 db.init_app(app)
-
 app.secret_key = "development-key"
 
-app.config['MAIL_SERVER'] = 'smtp.gmail.com'
-app.config['MAIL_PORT'] = 465
-app.config['MAIL_USERNAME'] = 'MTOOMEY@gmail.com'
-app.config['MAIL_PASSWORD'] = ''
-app.config['MAIL_USE_TLS'] = False
-app.config['MAIL_USE_SSL'] = True
+# mail server not used
+app.config.update(
+	DEBUG=True,
+	MAIL_SERVER='smtp.gmail.com',
+	MAIL_PORT=465,
+	MAIL_USE_SSL=True,
+	MAIL_USERNAME = 'business.expense.tracker@gmail.com',
+	MAIL_PASSWORD = 'e7hDzBKx2dSXzQ5'
+	)
+
+#EMAIL SETTINGS
+# app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+# app.config['MAIL_PORT'] = 465
+# app.config['MAIL_USERNAME'] = 'Martin.Toomey86@gmail.com'
+# app.config['MAIL_PASSWORD'] = ''
+# app.config['MAIL_USE_TLS'] = False
+# app.config['MAIL_USE_SSL'] = True
+
 mail = Mail(app)
 
 
@@ -28,14 +48,39 @@ def _slugify(string):
         return ""
     return None
 
-# end template filters
+# @app.route('/send-mail/')
+# def send_mail():
+# 	try:
+#         msg = Message("Forgot Password?",
+#             sender="business.expense.tracker@gmail.com",
+#             recipients=[email])
+#         msg.body = 'Hello '+username+',\nYou or someone else has requested that a new password be generated for your account. If you made this request, then please follow this link:'+link
+#         msg.html = render_template('/mails/reset-password.html', username=username, link=link)
+#         mail.send(msg)
+# 		return 'Mail sent!'
+# 	except Exception as e:
+# 		return(str(e))
+
+
+@app.route("/export")
+def export():
+    try:
+        bar_chart = pygal.Bar()     # Then create a bar graph object
+        bar_chart.add('Fibonacci', [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55])  # Add some values
+        #bar_chart.render_to_file('bar_chart.svg')  # Save the svg to a file
+        chart_data = bar_chart.render_data_uri() # saves to embedd tag
+        #return bar_chart.render_response()
+        return render_template("export.html",chart_data=chart_data)
+    except Exception as e:
+        return(str(e))
+
 
 @app.route("/logout")
 def logout():
     session.pop('email', None)
     session.pop('uid', None)
     return redirect(url_for("login"))
-
+    #return render_template("login.html")
 
 @app.route("/", methods=['GET', 'POST'])
 @app.route('/index', methods=['GET', 'POST'])
@@ -73,8 +118,8 @@ def profile():
     # msg = Message('Hello', sender = 'sidarcy@gmail.com', recipients = ['sidarcy@gmail.com'])
     #   	msg.body = "Your profile has been viewed"
     #   	mail.send(msg)
-
-    return render_template("profile.html", user=user)
+    return redirect(url_for('profile'))
+    #return render_template("profile.html", user=user)
 
 
 @app.route("/signup", methods=['GET', 'POST'])
@@ -211,9 +256,7 @@ def reject():
     req = Requests.query.filter_by(id=request_id).first()
     req.status = "Declined"
     db.session.commit()
-
     # SEND EMAIL HERE
-
     return redirect(url_for('employee_requests'))
 
 
@@ -223,24 +266,30 @@ def view_(path):
 
 @app.route('/tcs')
 def tcs():
-    return render_template('tcs.html')
+    #return render_template('tcs.html')
+    return redirect(url_for("tcs"))
+
 @app.route('/license')
 def license():
-    return render_template('license.html')
+    #return render_template('license.html')
+    return redirect(url_for("license"))
 
 @app.route('/privacy_policy')
 def privacy_policy():
-    return render_template('privacy_policy.html')
+    #return render_template('privacy_policy.html')
+    return redirect(url_for("privacy_policy"))
 
 @app.route('/faq')
 def faq():
-    return render_template('faq.html')
+    #return render_template('faq.html')
+    return redirect(url_for("faq"))
 
 @app.route('/settings')
 def settings():
-    return render_template('settings.html')
+    #return render_template('settings.html')
+    return redirect(url_for("settings"))
 
 
 if __name__ == "__main__":
-    app.run()
-#debug=True
+    app.run(debug=True)
+#

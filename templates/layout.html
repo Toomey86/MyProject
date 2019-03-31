@@ -2,9 +2,7 @@
 <html>
 
 <head>
-	<title>{% block title %}Expenses App{% endblock title %}</title>
-
-
+	<!-- <title>{% block title %}Expenses App{% endblock title %}</title> -->
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -13,14 +11,15 @@
 
 	<link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
 	<link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 	{% block additional_styles %}{% endblock additional_styles %}
 
 </head>
-<body class="">
+<body >
 
 	{% block content %}
 
-	
+
 	{% endblock content %}
 
 </body>

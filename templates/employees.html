@@ -6,9 +6,9 @@
   <h1 class="">My Employees</h1>
   <div class="btn-toolbar mb-2 mb-md-0">
     <div class="btn-group mr-2">
-      <a class="btn btn-sm btn-outline-secondary" href="{{ url_for('signup') }}">New</a>
+      <a class="btn btn-success btn-block" href="{{ url_for('signup') }}">New</a>
     </div>
-    
+
   </div>
 </div>
 
@@ -32,11 +32,10 @@
           <td>{{ employee.email }}</td>
         </tr>
       {% endfor %}
-    
-      
+
+
     </tbody>
   </table>
 </div>
 
 {% endblock main %}
-

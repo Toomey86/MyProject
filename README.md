@@ -1,23 +1,22 @@
-
-
 <!-- PREREQUISITES: -->
 
 Download: https://www.pgadmin.org/
 Sign up for https://www.heroku.com/ and download the toolbelt
 Github account
+e7hDzBKx2dSXzQ5
 
 <!--- Python Libraries used -->
-
 pip install vitual env
 pip install Flask SQL Alchemy # For DB models
 pip install Forms WTF # for forms
 pip install psycopg2  # for python/postgre
-pip install FLask-Mail (email)
+pip install flask_migrate
+pip install FLask-Mail # for email
+pip install pygal
 pip install gunicorn
 
 
 <!-- TECHNOLOGY USED -->
-
 Flask
 Postgres DB
 Bootstrap for font end
@@ -31,14 +30,19 @@ To activte virtual env: "source venv/bin/activate"
 <!-- Windows need conda installed -->
 conda create -n MyTestEnv
 conda env list # list of Enviroments
-activate MyTestEnv
-deactivate #mac source deactivate
-
+activate myflaskenv
+deactivate
+source deactivate # Mac
+conda env list
+conda remove --name myenv --all
 
 
 <!-- DATABASE INFO -->
 
 PGAdmin: http://127.0.0.1:58678/browser/
+digital ocean ip: 178.128.174.253
+                  206.189.25.70
+
 
 NokieN900 DB password
 
@@ -56,6 +60,16 @@ or simply use:
 
 $ python app.py
 
+<!--GitHub setup  -->
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin https://github.com/Toomey86/MyProject.git
+git push -u origin master
+#login Toomey86
+#Password: l83item
+
+
 <!--Create a requirment.txt file  -->
 pip freeze > requirements.txt
 
@@ -67,13 +81,20 @@ git add .
 git commit -am "Some message about changes"
 git push heroku master
 <!--Other Heroku useful commands  -->
+heroku open
+heroku ps
+heroku ps:scale web=1
+
 heroku addons
 heroku addons:create heroku-postgresql:hobby-dev
 heroku plugins:install heroku-pg-extras
-heroku open //
+
+heroku logs --tail #logs
 heroku run python
 
 
+<!--proc file  -->
+web: gunicorn app.wsgi --log-file -
 <!-- Shell -->
 $ flask shell
 from models import db
@@ -153,8 +174,8 @@ Financial Admin
 
 
 Manager
-john@himself.com
-NokiaN900
+managerTest@gmail.com   testpassword
+
 
 Employee
 allymkm@gmail.com
@@ -190,18 +211,3 @@ Cache main user
 Expense type as new table (admin can add, see 3.1)
 Change statuses to a DB table?
 Add receipt
-
-
-
-Notes & Questions
-
-Are adding, submitting and send for approval all different steps
-
-Is a location required as part of the expense
-
-Is the line manager / finance admin not the approver?
-
-Cost center appears in the Entity but no where else?
-
-Is there a need to a notification DB table?
-"# MyProject" 
