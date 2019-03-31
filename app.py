@@ -5,18 +5,24 @@ from forms import SignupForm, LoginForm, RequestForm
 from helpers.slugify import slugify
 from werkzeug import secure_filename
 from flask_mail import Mail, Message
+from sqlalchemy import create_engine
 import pygal
+import os
 
 app = Flask(__name__)
+#app.config.from_object("config.BaseConfig")
+app.config.from_object("config.DevelopmentConfig")
+#app.config.from_object(os.environ["APP_SETTINGS"])
 
-POSTGRES = {
-    'user': 'postgres',
-    'pw': 'password',
-    'db': 'blah',
-    'host': 'localhost',
-    'port': '5432',}
+# POSTGRES = {
+#     'user': 'postgres',
+#     'pw': 'password',
+#     'db': 'blah',
+#     'host': 'localhost',
+#     'port': '5432',}
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:password@localhost/blah'
-app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://%(user)s:%(pw)s@%(host)s:%(port)s/%(db)s" % POSTGRES
+
+#["SQLALCHEMY_DATABASE_URI"] = "postgresql://%(user)s:%(pw)s@%(host)s:%(port)s/%(db)s" % POSTGRES
 db.init_app(app)
 app.secret_key = "development-key"
 
@@ -291,5 +297,5 @@ def settings():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
-#
+    app.run()
+#debug=True
