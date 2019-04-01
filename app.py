@@ -11,8 +11,9 @@ import os
 
 app = Flask(__name__)
 #app.config.from_object("config.BaseConfig")
-app.config.from_object("config.DevelopmentConfig")
-#app.config.from_object(os.environ["APP_SETTINGS"])
+app.config.from_object("config.DevelopmentConfig") #this works for localhost/windows
+
+#app.config.from_object(os.environ["APP_SETTINGS"]) # this is for production on a linux box
 
 # POSTGRES = {
 #     'user': 'postgres',
@@ -54,6 +55,7 @@ def _slugify(string):
         return ""
     return None
 
+
 # @app.route('/send-mail/')
 # def send_mail():
 # 	try:
@@ -67,18 +69,28 @@ def _slugify(string):
 # 	except Exception as e:
 # 		return(str(e))
 
+# def check_login():
+# 	if 'uid' not in session:
+# 		return redirect(url_for('login'))
+#
+# def get_currentuser():
+# 	currentUser = User.query.filter_by(uid=session['uid']).first()
+# 	return currentUser
 
 @app.route("/export")
 def export():
-    try:
-        bar_chart = pygal.Bar()     # Then create a bar graph object
-        bar_chart.add('Fibonacci', [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55])  # Add some values
-        #bar_chart.render_to_file('bar_chart.svg')  # Save the svg to a file
-        chart_data = bar_chart.render_data_uri() # saves to embedd tag
-        #return bar_chart.render_response()
-        return render_template("export.html",chart_data=chart_data)
-    except Exception as e:
-        return(str(e))
+		if 'uid' not in session:
+			return redirect(url_for('login'))
+		currentUser = User.query.filter_by(uid=session['uid']).first()
+		try:
+			bar_chart = pygal.Bar()     # Then create a bar graph object
+			bar_chart.add('Fibonacci', [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55])  # Add some values
+			#bar_chart.render_to_file('bar_chart.svg')  # Save the svg to a file
+			chart_data = bar_chart.render_data_uri() # saves to embedd tag
+			#return bar_chart.render_response()
+			return render_template("export.html",user=currentUser,chart_data=chart_data) #chart_data=chart_data)
+		except Exception as e:
+			return(str(e))
 
 
 @app.route("/logout")
@@ -124,8 +136,8 @@ def profile():
     # msg = Message('Hello', sender = 'sidarcy@gmail.com', recipients = ['sidarcy@gmail.com'])
     #   	msg.body = "Your profile has been viewed"
     #   	mail.send(msg)
-    return redirect(url_for('profile'))
-    #return render_template("profile.html", user=user)
+    #return redirect(url_for('profile'))
+    return render_template("profile.html", user=user)
 
 
 @app.route("/signup", methods=['GET', 'POST'])
@@ -272,30 +284,49 @@ def view_(path):
 
 @app.route('/tcs')
 def tcs():
-    #return render_template('tcs.html')
-    return redirect(url_for("tcs"))
+	if 'uid' not in session:
+		return redirect(url_for('login'))
+	currentUser = User.query.filter_by(uid=session['uid']).first()
+		#return redirect(url_for("tcs"))
+	return render_template('tcs.html', user=currentUser)
 
 @app.route('/license')
 def license():
-    #return render_template('license.html')
-    return redirect(url_for("license"))
+	if 'uid' not in session:
+		return redirect(url_for('login'))
+	currentUser = User.query.filter_by(uid=session['uid']).first()
+	return render_template('license.html', user=currentUser)
+	#return redirect(url_for("license", user=currentUser))
 
 @app.route('/privacy_policy')
 def privacy_policy():
-    #return render_template('privacy_policy.html')
-    return redirect(url_for("privacy_policy"))
+	if 'uid' not in session:
+		return redirect(url_for('login'))
+	currentUser = User.query.filter_by(uid=session['uid']).first()
+	return render_template('privacy_policy.html',user=currentUser)
+	#return redirect(url_for("privacy_policy"))
 
 @app.route('/faq')
 def faq():
-    #return render_template('faq.html')
-    return redirect(url_for("faq"))
+	if 'uid' not in session:
+		return redirect(url_for('login'))
+	currentUser = User.query.filter_by(uid=session['uid']).first()
+	return render_template('faq.html', user=currentUser)
+	#return redirect(url_for("faq"))
 
 @app.route('/settings')
 def settings():
-    #return render_template('settings.html')
-    return redirect(url_for("settings"))
+	if 'uid' not in session:
+		return redirect(url_for('login'))
+	currentUser = User.query.filter_by(uid=session['uid']).first()
+	return render_template('settings.html', user=currentUser)
+	#return redirect(url_for("settings"))
+
 
 
 if __name__ == "__main__":
-    app.run()
-#debug=True
+    #app.run(host='0.0.0.0')
+	#app.run(host='0.0.0.0',port=5000)
+    app.run(host='127.0.0.1',port=5000)
+    #debug=True
+	#debug=True

@@ -8,7 +8,7 @@ e7hDzBKx2dSXzQ5
 <!--- Python Libraries used -->
 pip install vitual env
 pip install Flask SQL Alchemy # For DB models
-pip install Forms WTF # for forms
+pip install flask_wtf # for forms
 pip install psycopg2  # for python/postgre
 pip install flask_migrate
 pip install FLask-Mail # for email
@@ -26,7 +26,14 @@ JS and css
 <!--- VIRTUAL ENVIROMENT SETUP -->
 <!-- MAC/Linux -->
 To create a virtual env: "virtualenv venv"
-To activte virtual env: "source venv/bin/activate"
+To activte virtual env: "source venv3.6/bin/activate"
+
+apt-get install python3-venv
+python3 -m venv /path/to/new/virtual/environment
+virtualenv venv3.6
+source venv3.6/bin/activate
+pip install -r reqs.txt
+
 <!-- Windows need conda installed -->
 conda create -n MyTestEnv
 conda env list # list of Enviroments
@@ -63,9 +70,14 @@ $ python app.py
 <!--GitHub setup  -->
 git init
 git add README.md
+git add .
 git commit -m "first commit"
 git remote add origin https://github.com/Toomey86/MyProject.git
+
+git push --set-upstream origin amend-my-name
+
 git push -u origin master
+
 #login Toomey86
 #Password: l83item
 
@@ -74,13 +86,17 @@ git push -u origin master
 pip freeze > requirements.txt
 
 <!--Heroku set up  -->
-heroku login
+sudo snap install --classic heroku  #ubuntu
+heroku login or heroku login -i for cli
 git init
 heroku git:remote -a business-expense-tracker
 git add .
 git commit -am "Some message about changes"
 git push heroku master
 <!--Other Heroku useful commands  -->
+heroku config:set APP_SETTINGS=config.productionConfig --remote heroku
+heroku pg:promote HEROKU_POSTGRESQL_RED_URL
+
 heroku open
 heroku ps
 heroku ps:scale web=1
@@ -89,9 +105,12 @@ heroku addons
 heroku addons:create heroku-postgresql:hobby-dev
 heroku plugins:install heroku-pg-extras
 
+heroku config | grep HEROKU_POST
 heroku logs --tail #logs
 heroku run python
-
+heroku pg:reset DATABASE
+heroku run rake db:migrate
+heroku addons:destroy HEROKU_POSTGRESQL_<COLOR>
 
 <!--proc file  -->
 web: gunicorn app.wsgi --log-file -
