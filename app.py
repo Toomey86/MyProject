@@ -28,7 +28,6 @@ app = Flask(__name__)
 #SQLALCHEMY_DATABASE_URI = "postgresql://%(user)s:%(pw)s@%(host)s:%(port)s/%(db)s" % POSTGRES
 app.config['DATABASE_URL'] = "postgres://nfopxizqefgzxi:15b5b42c39d97e880ab5645ad30347e10876fb013b7c08be215160701fe627d6@ec2-54-247-70-127.eu-west-1.compute.amazonaws.com:5432/d20g1bp8eg5cpl"
 
-
 # POSTGRES = {
 #     'user': 'postgres',
 #     'pw': 'password',
