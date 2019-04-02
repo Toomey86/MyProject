@@ -14,6 +14,7 @@ app = Flask(__name__)
 #app.config['SQLALCHEMY_DATABASE_URI'] = "postgres://vdablsnwcxnhfe:9496676bcc99b71600ec6ff2b5360183b3b8a867619471d84a58ce7fae3dcdf7@ec2-46-137-113-157.eu-west-1.compute.amazonaws.com:5432/d2m32g8i5g87pu"
 
 app.config.from_object("config.BaseConfig")
+print(config.BaseConfig)
 
 #app.config.from_object("config.DevelopmentConfig") #this works for localhost/windows
 #app.config.from_object(os.environ["APP_SETTINGS"]) # this is for production on a linux box
