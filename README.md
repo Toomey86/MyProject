@@ -100,7 +100,7 @@ git push heroku master
 heroku addons: add heroku-postgresql:hobby-dev
 <!--Other Heroku useful commands  -->
 heroku config:set APP_SETTINGS=config.productionConfig --remote heroku
-heroku pg:promote HEROKU_POSTGRESQL_RED_URL
+heroku pg:promote HEROKU_POSTGRESQL_ROSE_URL
 
 heroku open
 heroku ps

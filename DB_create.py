@@ -1,7 +1,8 @@
-from app import db
 from models import db, User, Requests
-from flask import Flask
+#from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from models import User
+
 
 # FLASK_APP(app.py)
 #app = Flask(__name__)
