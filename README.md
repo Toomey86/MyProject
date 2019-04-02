@@ -97,6 +97,7 @@ or testherokuenv-postgres
 git add .
 git commit -am "Some message about changes"
 git push heroku master
+heroku addons: add heroku-postgresql:hobby-dev
 <!--Other Heroku useful commands  -->
 heroku config:set APP_SETTINGS=config.productionConfig --remote heroku
 heroku pg:promote HEROKU_POSTGRESQL_RED_URL
