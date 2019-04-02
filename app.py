@@ -13,7 +13,8 @@ app = Flask(__name__)
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/blah'
 #app.config['SQLALCHEMY_DATABASE_URI'] = "postgres://vdablsnwcxnhfe:9496676bcc99b71600ec6ff2b5360183b3b8a867619471d84a58ce7fae3dcdf7@ec2-46-137-113-157.eu-west-1.compute.amazonaws.com:5432/d2m32g8i5g87pu"
 
-#app.config.from_object("config.BaseConfig")
+app.config.from_object("config.BaseConfig")
+
 #app.config.from_object("config.DevelopmentConfig") #this works for localhost/windows
 #app.config.from_object(os.environ["APP_SETTINGS"]) # this is for production on a linux box
 
@@ -38,7 +39,7 @@ app.config['HEROKU_POSTGRESQL_ROSE_URL'] = "postgres://nfopxizqefgzxi:15b5b42c39
 #["SQLALCHEMY_DATABASE_URI"] = "postgresql://%(user)s:%(pw)s@%(host)s:%(port)s/%(db)s" % POSTGRES
 
 db.init_app(app)
-app.secret_key = "development-key"
+#app.secret_key = "development-key"
 
 """
 # mail server not used
