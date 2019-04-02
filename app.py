@@ -10,10 +10,20 @@ import pygal
 import os
 
 app = Flask(__name__)
-#app.config.from_object("config.BaseConfig")
-app.config.from_object("config.DevelopmentConfig") #this works for localhost/windows
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/blah'
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgres://nfopxizqefgzxi:15b5b42c39d97e880ab5645ad30347e10876fb013b7c08be215160701fe627d6@ec2-54-247-70-127.eu-west-1.compute.amazonaws.com:5432/d20g1bp8eg5cpl"
 
+#app.config.from_object("config.BaseConfig")
+#app.config.from_object("config.DevelopmentConfig") #this works for localhost/windows
 #app.config.from_object(os.environ["APP_SETTINGS"]) # this is for production on a linux box
+
+# POSTGRES = {
+# 		username = doadmin,
+# 		password = gyv8elr7ejd4sy11,
+# 		host = db-postgresql-lon1-12053-do-user-4995347-0.db.ondigitalocean.com,
+# 		port = 25060,
+# 		database = defaultdb,
+# 		sslmode = require}
 
 # POSTGRES = {
 #     'user': 'postgres',
@@ -27,15 +37,16 @@ app.config.from_object("config.DevelopmentConfig") #this works for localhost/win
 db.init_app(app)
 app.secret_key = "development-key"
 
+"""
 # mail server not used
-app.config.update(
-	DEBUG=True,
-	MAIL_SERVER='smtp.gmail.com',
-	MAIL_PORT=465,
-	MAIL_USE_SSL=True,
-	MAIL_USERNAME = 'business.expense.tracker@gmail.com',
-	MAIL_PASSWORD = 'e7hDzBKx2dSXzQ5'
-	)
+# app.config.update(
+# 	DEBUG=True,
+# 	MAIL_SERVER='smtp.gmail.com',
+# 	MAIL_PORT=465,
+# 	MAIL_USE_SSL=True,
+# 	MAIL_USERNAME = 'business.expense.tracker@gmail.com',
+# 	MAIL_PASSWORD = 'e7hDzBKx2dSXzQ5'
+# 	)
 
 #EMAIL SETTINGS
 # app.config['MAIL_SERVER'] = 'smtp.gmail.com'
@@ -46,7 +57,7 @@ app.config.update(
 # app.config['MAIL_USE_SSL'] = True
 
 mail = Mail(app)
-
+"""
 
 # Template Filters
 @app.template_filter('slugify')
@@ -325,8 +336,9 @@ def settings():
 
 
 if __name__ == "__main__":
+	app.run(debug=True)
     #app.run(host='0.0.0.0')
 	#app.run(host='0.0.0.0',port=5000)
-    app.run(host='127.0.0.1',port=5000)
+    #app.run(host='127.0.0.1',port=5000)
     #debug=True
 	#debug=True

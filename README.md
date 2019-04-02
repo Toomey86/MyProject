@@ -7,7 +7,8 @@ e7hDzBKx2dSXzQ5
 
 <!--- Python Libraries used -->
 pip install vitual env
-pip install Flask SQL Alchemy # For DB models
+pip install flask_sqlalchemy  For DB models
+pip install flask_migrate
 pip install flask_wtf # for forms
 pip install psycopg2  # for python/postgre
 pip install flask_migrate
@@ -67,6 +68,8 @@ or simply use:
 
 $ python app.py
 
+
+
 <!--GitHub setup  -->
 git init
 git add README.md
@@ -90,6 +93,7 @@ sudo snap install --classic heroku  #ubuntu
 heroku login or heroku login -i for cli
 git init
 heroku git:remote -a business-expense-tracker
+or testherokuenv-postgres
 git add .
 git commit -am "Some message about changes"
 git push heroku master
@@ -131,6 +135,14 @@ db.session.rollback()
 
 <!-- ORM Queries -->
 User.query.all();
+
+
+username = doadmin
+password = gyv8elr7ejd4sy11
+host = db-postgresql-lon1-12053-do-user-4995347-0.db.ondigitalocean.com
+port = 25060
+database = defaultdb
+sslmode = require
 
 
 <!-- APP STORYBOARD --->
