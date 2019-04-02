@@ -11,19 +11,22 @@ import os
 
 app = Flask(__name__)
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/blah'
-app.config['SQLALCHEMY_DATABASE_URI'] = "postgres://vdablsnwcxnhfe:9496676bcc99b71600ec6ff2b5360183b3b8a867619471d84a58ce7fae3dcdf7@ec2-46-137-113-157.eu-west-1.compute.amazonaws.com:5432/d2m32g8i5g87pu"
+#app.config['SQLALCHEMY_DATABASE_URI'] = "postgres://vdablsnwcxnhfe:9496676bcc99b71600ec6ff2b5360183b3b8a867619471d84a58ce7fae3dcdf7@ec2-46-137-113-157.eu-west-1.compute.amazonaws.com:5432/d2m32g8i5g87pu"
 
 #app.config.from_object("config.BaseConfig")
 #app.config.from_object("config.DevelopmentConfig") #this works for localhost/windows
 #app.config.from_object(os.environ["APP_SETTINGS"]) # this is for production on a linux box
 
 # POSTGRES = {
-# 		username = doadmin,
-# 		password = gyv8elr7ejd4sy11,
+# 		user = doadmin,
+# 		pw = gyv8elr7ejd4sy11,
+# 		db = defaultdb,
 # 		host = db-postgresql-lon1-12053-do-user-4995347-0.db.ondigitalocean.com,
 # 		port = 25060,
-# 		database = defaultdb,
 # 		sslmode = require}
+#SQLALCHEMY_DATABASE_URI = "postgresql://%(user)s:%(pw)s@%(host)s:%(port)s/%(db)s" % POSTGRES
+app.config['HEROKU_POSTGRESQL_ROSE_URL'] = "postgres://nfopxizqefgzxi:15b5b42c39d97e880ab5645ad30347e10876fb013b7c08be215160701fe627d6@ec2-54-247-70-127.eu-west-1.compute.amazonaws.com:5432/d20g1bp8eg5cpl"
+
 
 # POSTGRES = {
 #     'user': 'postgres',
@@ -31,9 +34,9 @@ app.config['SQLALCHEMY_DATABASE_URI'] = "postgres://vdablsnwcxnhfe:9496676bcc99b
 #     'db': 'blah',
 #     'host': 'localhost',
 #     'port': '5432',}
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:password@localhost/blah'
-
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:password@localhost/blah'
 #["SQLALCHEMY_DATABASE_URI"] = "postgresql://%(user)s:%(pw)s@%(host)s:%(port)s/%(db)s" % POSTGRES
+
 db.init_app(app)
 app.secret_key = "development-key"
 
