@@ -1,9 +1,10 @@
-from flask import Flask,  render_template, request, session, redirect, url_for, send_from_directory
+from flask import Flask, flash, render_template, request, session, redirect, url_for, send_from_directory
 from flask_migrate import MigrateCommand, Migrate
 from models import db, User, Requests
 from forms import SignupForm, LoginForm, RequestForm
 from helpers.slugify import slugify
 from werkzeug import secure_filename
+from functools import wraps
 from flask_mail import Mail, Message
 from sqlalchemy import create_engine
 import pygal
@@ -25,20 +26,20 @@ app = Flask(__name__)
 # 		host = db-postgresql-lon1-12053-do-user-4995347-0.db.ondigitalocean.com,
 # 		port = 25060,
 # 		sslmode = require}
-#SQLALCHEMY_DATABASE_URI = "postgresql://%(user)s:%(pw)s@%(host)s:%(port)s/%(db)s" % POSTGRES
-app.config['DATABASE_URL'] = "postgres://nfopxizqefgzxi:15b5b42c39d97e880ab5645ad30347e10876fb013b7c08be215160701fe627d6@ec2-54-247-70-127.eu-west-1.compute.amazonaws.com:5432/d20g1bp8eg5cpl"
 
-# POSTGRES = {
-#     'user': 'postgres',
-#     'pw': 'password',
-#     'db': 'blah',
-#     'host': 'localhost',
-#     'port': '5432',}
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:password@localhost/blah'
-#["SQLALCHEMY_DATABASE_URI"] = "postgresql://%(user)s:%(pw)s@%(host)s:%(port)s/%(db)s" % POSTGRES
+#app.config['DATABASE_URL'] = "postgres://nfopxizqefgzxi:15b5b42c39d97e880ab5645ad30347e10876fb013b7c08be215160701fe627d6@ec2-54-247-70-127.eu-west-1.compute.amazonaws.com:5432/d20g1bp8eg5cpl"
+
+POSTGRES = {
+    'user': 'nfopxizqefgzxi',
+    'pw': '15b5b42c39d97e880ab5645ad30347e10876fb013b7c08be215160701fe627d6',
+    'db': 'd20g1bp8eg5cpl',
+    'host': 'ec2-54-247-70-127.eu-west-1.compute.amazonaws.com',
+    'port': '5432',}
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:password@localhost/blah'
+#DATABASE_URL = "postgresql://%(user)s:%(pw)s@%(host)s:%(port)s/%(db)s" % POSTGRES
 
 db.init_app(app)
-#app.secret_key = "development-key"
+app.secret_key = "development-key"
 
 """
 # mail server not used
@@ -91,6 +92,17 @@ def _slugify(string):
 # 	currentUser = User.query.filter_by(uid=session['uid']).first()
 # 	return currentUser
 
+def login_required(f):
+    @wraps(f)
+    def wrap(*args, **kwargs):
+        if 'uid' in session:
+            return f(*args, **kwargs)
+        else:
+            flash("You need to login first")
+            return redirect(url_for('/'))
+
+    return wrap
+
 @app.route("/export")
 def export():
 		if 'uid' not in session:
@@ -108,13 +120,19 @@ def export():
 
 
 @app.route("/logout")
+@login_required
 def logout():
+    session.clear
+    flash("you have been logged out")
+    #gc.collect()
     session.pop('email', None)
     session.pop('uid', None)
     return redirect(url_for("login"))
-    #return render_template("login.html")
+    # return render_template("login.html")
 
 @app.route("/", methods=['GET', 'POST'])
+
+
 @app.route('/index', methods=['GET', 'POST'])
 def login():
     if 'uid' in session:
@@ -146,8 +164,7 @@ def profile():
     if 'uid' not in session:
         return redirect(url_for('login'))
     user = User.query.filter_by(uid=session['uid']).first()
-
-    # msg = Message('Hello', sender = 'sidarcy@gmail.com', recipients = ['sidarcy@gmail.com'])
+    #  msg = Message('Hello', sender = 'business.expense.tracker@gmail.com', recipients = ['martin.toomey86@gmail.com'])
     #   	msg.body = "Your profile has been viewed"
     #   	mail.send(msg)
     #return redirect(url_for('profile'))
@@ -339,9 +356,8 @@ def settings():
 
 
 if __name__ == "__main__":
-	app.run()
+	app.run(debug=True)
     #app.run(host='0.0.0.0')
-	#app.run(host='0.0.0.0',port=5000)
+	#app.run(host='0.0.0.0',port=8000)
     #app.run(host='127.0.0.1',port=5000)
     #debug=True
-	#debug=True
