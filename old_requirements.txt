@@ -76,7 +76,7 @@ tabulate==0.8.2
 urllib3==1.22
 URLObject==2.4.3
 virtualenv==16.4.1
-waitress==1.2.1
+waitress==1.4.2
 Werkzeug==0.14.1
 wincertstore==0.2
 WTForms==2.1
