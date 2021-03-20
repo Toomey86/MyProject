@@ -33,7 +33,7 @@ idna==2.6
 image==1.5.27
 isodate==0.6.0
 itsdangerous==0.24
-Jinja2==2.10
+Jinja2==2.11.3
 jmespath==0.9.4
 knack==0.5.1
 lazy==1.3
