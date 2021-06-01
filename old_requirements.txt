@@ -73,7 +73,7 @@ six==1.11.0
 SQLAlchemy==1.2.6
 SQLAlchemy-Utils==0.33.2
 tabulate==0.8.2
-urllib3==1.22
+urllib3==1.26.5
 URLObject==2.4.3
 virtualenv==16.4.1
 waitress==1.2.1
